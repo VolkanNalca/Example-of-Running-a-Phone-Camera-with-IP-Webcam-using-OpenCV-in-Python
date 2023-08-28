@@ -1,1 +1,26 @@
+import cv2
 
+# IP kamera adresi
+camera_url = "http://IP_ADRESI:PORT/video"
+
+# Video yakalama nesnesini oluştur
+cap = cv2.VideoCapture(camera_url)
+
+while True:
+    # Görüntü yakala
+    ret, frame = cap.read()
+
+    if not ret:
+        print("Video akışı alınamıyor.")
+        break
+
+    # Görüntüyü göster
+    cv2.imshow("IP Kamera Görüntüsü", frame)
+
+    # 'q' tuşuna basıldığında döngüyü kır
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Video yakalama nesnesini serbest bırak
+cap.release()
+cv2.destroyAllWindows()
